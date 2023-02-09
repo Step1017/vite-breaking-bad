@@ -13,7 +13,7 @@
         methods: {
             getCards() {
                 axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php').then((response) => {
-                this.store.cards = response.data.data.slice(0,20);
+                this.store.cards = response.data.data.slice(0,50);
                 this.store.loading = true;
             });
             },
@@ -31,7 +31,7 @@
                             archetype: this.archetypeChoice
                         }
                     }).then((response) => {
-                        this.store.cards = response.data.data.slice(0,20);
+                        this.store.cards = response.data.data.slice(0,50);
                     });
                 } 
                 else {
