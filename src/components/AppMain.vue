@@ -12,9 +12,9 @@
 
 <template>
     <main class="py-3">
-        <div class="container">
+        <div class="container" v-if="store.loading">
             <div class="mb-3">
-                <select name="filter">
+                <select class="px-5 py-1 border rounded" name="filter">
                     <option value="Alien" selected>
                         Alien
                     </option>
@@ -36,6 +36,12 @@
                 </div>
             </div>
         </div>
+        <div v-else class="d-flex justify-content-center align-items-center py-5 bg-light ">
+            <h2 class="me-3 text-dark">
+                LOADING...
+            </h2>
+            <div class="spinner-border text-dark" role="status"></div>
+        </div>        
     </main>
 </template>
 
