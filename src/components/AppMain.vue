@@ -6,6 +6,7 @@
         data() {
             return {
                 store,
+                archetypeChoice: '',
             };
         },
 
@@ -22,6 +23,21 @@
                 this.store.archetypes = response.data;
                 });
             },
+
+            filteredCards () {
+                if (this.archetypeChoice != '') {
+                    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php', {
+                        params: {
+                            archetype: this.archetypeChoice
+                        }
+                    }).then((response) => {
+                        this.store.cards = response.data.data.slice(0,20);
+                    });
+                } 
+                else {
+                    this.getCards ();
+                }
+            }
         },
 
         created() {
@@ -35,7 +51,7 @@
     <main class="py-3">
         <div class="container" v-if="store.loading">
             <div class="mb-3">
-                <select class="px-5 py-1 border rounded form-select" name="filter">
+                <select class="px-5 py-1 border rounded form-group col-md-3" name="filter" v-model="archetypeChoice" @change="filteredCards()">
                     <option value="" selected> 
                         Choose an Archetype
                     </option>
